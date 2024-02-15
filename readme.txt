@@ -4,6 +4,8 @@ Compatible PHP 4-5 (phpsudo-4-5.zip) / 7-8 (phpsudo_pourPHP7-8.zip)
 
 licensed under the Creative Commons - Attribution - Non-Commercial license.
 
+Play Online : https://sudoku.nlion.fr/
+
 -----------------
 
 Sudoku Game Developed in PHP
