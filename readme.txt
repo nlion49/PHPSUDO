@@ -47,3 +47,63 @@ TailleTexte : dimension du texte dans les cases / Dimension of text within cells
 
 La grille utilise un “template”, vous pouvez donc très facilement changer les couleurs, la police, la disposition du jeu. /
 
+Présentation technique de la classe SuDoKu en PHP :
+:Classe calculGrillePleine
+Cette classe contient les méthodes de base pour la génération et la résolution des grilles de Sudoku.
+Elle possède des propriétés telles que $SudoVide (une grille vide), $tirage (les chiffres à utiliser), $sudo (la grille en cours de résolution), $max et $min (les dimensions de la grille), $NbCasesHZone et $NbCasesVZone (le nombre de cases horizontales et verticales dans une zone), $TimeLimitCalcul (le temps limite de calcul), $TimeOut (un indicateur de dépassement de temps) et $fin (un indicateur de fin de résolution).
+Les méthodes principales sont :
+zone() : retourne les valeurs d’une zone de la grille
+colonne() : retourne les valeurs d’une colonne de la grille
+Grille() : résout la grille de manière récursive en essayant toutes les valeurs possibles dans les cases vides
+Classe SuDoKu
+
+Cette classe hérite de calculGrillePleine et ajoute des fonctionnalités supplémentaires.
+Propriétés :
+$level, $LevelHard, $TabValeursPossible, $YTabValeursPossible, $XTabValeursPossible, $LimitNiveau, $GrillePleine, $IncompleteGrille, $TestGrilleSudoku, $ValidIncompleteGrille, $CasesVidesCoordonneesX, $CasesVidesCoordonneesY, $WithSymbol, $t0
+Méthodes :
+__construct() : constructeur de la classe, initialise les propriétés
+init() : initialise une nouvelle grille de Sudoku
+GetGrille() : génère une grille de Sudoku complète
+NiveauDifficulte() : détermine le niveau de difficulté de la grille
+create_grille_sudoku() : crée une grille de Sudoku incomplète en fonction du niveau de difficulté
+replace_by_symbol() : remplace les chiffres par des symboles (lettres) dans l’affichage
+lineariser_grilles() : convertit la grille en une chaîne de caractères pour la stocker en base de données
+drawing() : affiche la grille de Sudoku avec un système de mise en forme CSS
+Correction() : vérifie et corrige la grille remplie
+UnsetInconnus() : supprime les coordonnées d’une case vide de la liste des cases à remplir
+ValeursInterdites() : retourne les valeurs interdites dans une case en fonction de la ligne, de la colonne et de la zone
+DeductionParValeurInterdites() : retourne les valeurs possibles dans une case en fonction des valeurs interdites
+DeductionSolitaireNu() : résout la grille en utilisant la méthode de déduction “Solitaire Nu”
+SearchPairesNues() et SearchPairesNuesCache() : résout la grille en utilisant la méthode de déduction “Paires Nues”
+SelectValues() : sélectionne les valeurs possibles dans une ligne, une colonne ou une zone
+CalculSolutionDeduction() : résout la grille en utilisant les méthodes de déduction
+Debug() : vérifie la validité de la grille remplie par l’utilisateur
+Cette classe offre une implémentation complète de la génération et de la résolution de grilles de Sudoku, avec différents niveaux de difficulté et des méthodes de résolution avancées. Elle peut être utilisée comme base pour développer des applications de Sudoku plus complexes.
+
+Méthodes de résolutions :
+Les méthodes de résolution basées sur des raisonnements humains qui sont présentes :
+
+Méthode de la “Déduction par Valeurs Interdites”
+Implémentée dans la méthode ValeursInterdites() et DeductionParValeurInterdites().
+Objectif : Identifier les valeurs interdites dans une case en fonction de la ligne, de la colonne et de la zone, puis en déduire les valeurs possibles.
+Méthode de la “Paire Nue”
+Implémentée dans les méthodes SearchPairesNues() et SearchPairesNuesCache().
+Objectif : Identifier les paires de valeurs qui ne peuvent apparaître que dans deux cases d’une ligne, d’une colonne ou d’une zone, et en déduire les valeurs à placer.
+Méthode du “Solitaire Nu”
+Implémentée dans la méthode DeductionSolitaireNu().
+Objectif : Identifier les valeurs uniques dans une ligne, une colonne ou une zone, et les placer dans la grille.
+La classe SuDoKu implémente déjà trois méthodes de résolution basées sur des raisonnements humains :
+
+Ces méthodes permettent de résoudre une partie des grilles de Sudoku en utilisant des techniques similaires à celles employées par les joueurs humains. Cependant, il serait possible d’ajouter d’autres méthodes de résolution humaine, comme la recherche de paires cachées, de chaînes cachées, de poissons, de poissons cachés ou encore la méthode de la supposition.
+
+Voici quelques limites et points à améliorer dans le code de la classe SuDoKu :
+Performances et temps d’exécution:
+Bien que le code gère le temps d’exécution pour éviter les timeouts, il pourrait être optimisé davantage pour améliorer les performances, notamment pour les grilles de grande taille.
+L’utilisation de techniques comme le multithreading ou la parallélisation pourrait être envisagée pour accélérer la résolution des grilles.
+Lisibilité et maintenabilité du code:
+Certaines parties du code sont un peu complexes et difficiles à comprendre, notamment les méthodes de résolution par déduction.
+Une refactorisation du code, avec une meilleure séparation des responsabilités et une documentation plus détaillée, pourrait améliorer la lisibilité et la maintenabilité.
+La classe SuDoKu offre une implémentation de base pour la génération et la résolution de grilles de Sudoku, il existe plusieurs opportunités d’amélioration.
+
+Revoir un peu le code l'adpater aux éxigences de la programmation sur php 8, la programmation d'origine date de 2008. 
+
